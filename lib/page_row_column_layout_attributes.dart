@@ -1,0 +1,70 @@
+import 'package:flutter/material.dart';
+import 'package:test_app/layout_attribute_selector.dart';
+
+class PageRowColumnLayoutAttributes extends StatelessWidget {
+  PageRowColumnLayoutAttributes({
+    this.onUpdateLayout,
+    this.onUpdateMainAxisAlignment,
+    this.onUpdateCrossAxisAlignment,
+    this.onUpdateMainAxisSize,
+  });
+
+  final ValueChanged<int>? onUpdateLayout;
+  final ValueChanged<int>? onUpdateMainAxisAlignment;
+  final ValueChanged<int>? onUpdateCrossAxisAlignment;
+  final ValueChanged<int>? onUpdateMainAxisSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisSize: MainAxisSize.max,
+      children: <Widget>[
+        Expanded(
+            flex: 1,
+            child: Column(
+              children: <Widget>[
+                LayoutAttributeSelector(
+                  title: 'Layout',
+                  values: const <String>['row', 'column'],
+                  onChange: onUpdateLayout,
+                ),
+                LayoutAttributeSelector(
+                  title: 'Main Axis Size',
+                  values: const <String>['min', 'max'],
+                  onChange: onUpdateMainAxisSize,
+                ),
+              ],
+            )),
+        Expanded(
+            flex: 1,
+            child: Column(
+              children: <Widget>[
+                LayoutAttributeSelector(
+                  title: 'Main Axis Alignment',
+                  values: const <String>[
+                    'start',
+                    'end',
+                    'center',
+                    'space\nbetween',
+                    'space\naround',
+                    'space\nevenly'
+                  ],
+                  onChange: onUpdateMainAxisAlignment,
+                ),
+                LayoutAttributeSelector(
+                  title: 'Cross Axis Alignment',
+                  values: const <String>[
+                    'start',
+                    'end',
+                    'center',
+                    'stretch',
+                  ],
+                  onChange: onUpdateCrossAxisAlignment,
+                ),
+              ],
+            )),
+      ],
+    );
+  }
+}
